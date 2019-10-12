@@ -42,7 +42,7 @@
 ;;;;;; my themes ;;;;;;; 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; A Jonathan blow emacs tribute 
+;; A Jonathan Blow emacs tribute 
 ;; written by yours truly. 
 
 (deftheme Kristian_Ramsamooj_theme_2)
@@ -82,9 +82,10 @@
  '(header-line ((default (:inherit (mode-line))) (((type tty)) (:underline (:color foreground-color :style line) :inverse-video nil)) (((class color grayscale) (background light)) (:box nil :foreground "grey20" :background "grey90")) (((class color grayscale) (background dark)) (:box nil :foreground "grey90" :background "grey20")) (((class mono) (background light)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "black" :background "white")) (((class mono) (background dark)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "white" :background "black"))))
  '(tooltip ((t (:foreground "systeminfotext" :background "systeminfowindow" :inherit (variable-pitch)))))
  '(mode-line ((((class color) (min-colors 88)) (:foreground "black" :background "#b4a485" :box (:line-width -1 :color nil :style released-button))) (t (:inverse-video t))))
- '(mode-line-emphasis ((t (:weight bold))))
+ ;; '(mode-line-emphasis ((t (:weight bold))))
  '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color "blue" :style released-button))) (t (:inherit (highlight)))))
- '(mode-line-inactive ((t (:foreground "black" :background "#b4a485"))))
+ ;; change here background color was #b4a485 how is grey70
+ '(mode-line-inactive ((t (:foreground "black" :background "grey70"))))
  '(isearch ((t (:weight bold :foreground "#303030" :background "red"))))
  '(isearch-fail ((((class color) (min-colors 88) (background light)) (:background "RosyBrown1")) (((class color) (min-colors 88) (background dark)) (:background "red4")) (((class color) (min-colors 16)) (:background "red")) (((class color) (min-colors 8)) (:background "red")) (((class color grayscale)) (:foreground "grey")) (t (:inverse-video t))))
  '(lazy-highlight ((((class color) (min-colors 88) (background light)) (:background "blue")) (((class color) (min-colors 88) (background dark)) (:background "blue")) (((class color) (min-colors 16)) (:background "blue")) (((class color) (min-colors 8)) (:background "blue")) (t (:underline (:color foreground-color :style line)))))
@@ -311,9 +312,6 @@
 (setq undo-limit 20000000)
 (setq undo-strong-limit 40000000)
 
-;; open emacs in fullscreen mode 
-(toggle-frame-fullscreen) 
-
 ;; display how much battery is left 
 (display-battery-mode 1)
 
@@ -348,6 +346,9 @@
 
 ;; disable #autosave#
 (setq auto-save-default nil)
+
+;; open emacs in fullscreen mode 
+(toggle-frame-fullscreen) 
 
 ;; ace window
 (global-set-key (kbd "C-x p") 'ace-window)
