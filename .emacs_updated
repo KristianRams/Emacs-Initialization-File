@@ -9,6 +9,20 @@
                          ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
 
+;; some changes
+
+(diminish 'projectile-mode)
+
+(global-anzu-mode +1)
+(global-set-key [C-q] 'anzu-query-replace)
+
+(define-key global-map [f9] 'previous-error)
+(define-key global-map [f10] 'first-error)
+(define-key global-map [f11] 'next-error)
+
+(global-set-key (kbd "<f12>") 'toggle-frame-fullscreen)
+
+
 ;; minor changes
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -45,7 +59,7 @@
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 
-(global-set-key (kbd "C-x |") #'comment-or-uncomment-region-or-line)
+(global-set-key (kbd "C-x |") 'comment-or-uncomment-region-or-line)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;; my themes ;;;;;;; 
@@ -54,62 +68,62 @@
 ;; A Jonathan Blow emacs tribute 
 ;; written by yours truly. 
 
-;; (deftheme Kristian_Ramsamooj_theme_2)
-;; (custom-theme-set-faces
-;;  'Kristian_Ramsamooj_theme_2
-;;  (set-cursor-color "light green")
-;;  '(fixed-pitch ((t (:family "Monospace"))))
-;;  '(variable-pitch ((t (:family "Arial" :foundry "outline" :width normal :height 98 :weight normal :slant normal))))
-;;  '(escape-glyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
-;;  '(minibuffer-prompt ((t (:weight bold :foreground "#708090"))))
-;;  '(highlight ((t (:background "red"))))
-;;  '(region ((t (:background "blue"))))
-;;  '(shadow ((((class color grayscale) (min-colors 88) (background light)) (:foreground "grey50")) (((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey70")) (((class color) (min-colors 8) (background light)) (:foreground "green")) (((class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
-;;  '(secondary-selection ((((class color) (min-colors 88) (background light)) (:background "yellow1")) (((class color) (min-colors 88) (background dark)) (:background "SkyBlue4")) (((class color) (min-colors 16) (background light)) (:background "yellow")) (((class color) (min-colors 16) (background dark)) (:background "SkyBlue4")) (((class color) (min-colors 8)) (:foreground "black" :background "cyan")) (t (:inverse-video t))))
-;;  '(trailing-whitespace ((((class color) (background light)) (:background "red1")) (((class color) (background dark)) (:background "red1")) (t (:inverse-video t))))
-;;  '(font-lock-builtin-face ((t (:foreground "#cfbfad"))))
-;;  ;; change here was green4
-;;  ;; change here was #3FDF1F
-;;  '(font-lock-comment-delimiter-face ((t (:foreground "#3FDF1F"))))
-;;  '(font-lock-comment-face ((t (:foreground "#3FDF1F"))))
-;;  ;; change here they were both green3 
-;;  '(font-lock-constant-face ((t (:foreground "#85ecd7"))))
-;;  '(font-lock-doc-face ((t (:foreground "#cd8b00"))))
-;;  '(font-lock-function-name-face ((t (:foreground "#e1f4ff"))))
-;;  '(font-lock-keyword-face ((t (:foreground "#e1f4ff"))))
-;;  '(font-lock-negation-char-face ((t nil)))
-;;  '(font-lock-preprocessor-face ((t (:foreground "#ade6b3"))))
-;;  '(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
-;;  '(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
-;;  string was this before  #0BB6AB
-;;  '(font-lock-string-face ((t (:foreground "#0fdfaf"))))
-;;  '(font-lock-type-face ((t (:foreground "#ade6b3"))))
-;;  '(font-lock-variable-name-face ((t (:foreground "#e1f4ff"))))
-;;  '(font-lock-warning-face ((t (:foreground "#ffffff" :background "#ff0000"))))
-;;  '(button ((t (:inherit (link)))))
-;;  '(link ((((class color) (min-colors 88) (background light)) (:underline (:color foreground-color :style line) :foreground "RoyalBlue3")) (((class color) (background light)) (:underline (:color foreground-color :style line) :foreground "blue")) (((class color) (min-colors 88) (background dark)) (:underline (:color foreground-color :style line) :foreground "cyan1")) (((class color) (background dark)) (:underline (:color foreground-color :style line) :foreground "cyan")) (t (:inherit (underline)))))
-;;  '(link-visited ((default (:inherit (link))) (((class color) (background light)) (:foreground "magenta4")) (((class color) (background dark)) (:foreground "violet"))))
-;;  '(fringe ((t (:foreground "#cfbfad" :background "#1e1e27"))))
-;;  '(header-line ((default (:inherit (mode-line))) (((type tty)) (:underline (:color foreground-color :style line) :inverse-video nil)) (((class color grayscale) (background light)) (:box nil :foreground "grey20" :background "grey90")) (((class color grayscale) (background dark)) (:box nil :foreground "grey90" :background "grey20")) (((class mono) (background light)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "black" :background "white")) (((class mono) (background dark)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "white" :background "black"))))
-;;  '(tooltip ((t (:foreground "systeminfotext" :background "systeminfowindow" :inherit (variable-pitch)))))
-;;  '(mode-line ((((class color) (min-colors 88)) (:foreground "black" :background "#b4a485" :box (:line-width -1 :color nil :style released-button))) (t (:inverse-video t))))
-;;  ;; '(mode-line-emphasis ((t (:weight bold))))
-;;  '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color "blue" :style released-button))) (t (:inherit (highlight)))))
-;;  ;; change here background color was #b4a485 how is grey70
-;;  '(mode-line-inactive ((t (:foreground "black" :background "grey70"))))
-;;  ;; change here was red now pink
-;;  '(isearch ((t (:weight bold :foreground "#303030" :background "pink"))))
-;;  '(isearch-fail ((((class color) (min-colors 88) (background light)) (:background "RosyBrown1")) (((class color) (min-colors 88) (background dark)) (:background "red4")) (((class color) (min-colors 16)) (:background "pink")) (((class color) (min-colors 8)) (:background "pink")) (((class color grayscale)) (:foreground "grey")) (t (:inverse-video t))))
-;;  ;; Get rid of this in order to have a clear background while isearch 
-;;  ;; '(lazy-highlight ((((class color) (min-colors 88) (background light)) (:background "blue")) (((class color) (min-colors 88) (background dark)) (:background "blue")) (((class color) (min-colors 16)) (:background "blue")) (((class color) (min-colors 8)) (:background "blue")) (t (:underline (:color foreground-color :style line)))))
-;;  '(match ((((class color) (min-colors 88) (background light)) (:background "yellow1")) (((class color) (min-colors 88) (background dark)) (:background "RoyalBlue3")) (((class color) (min-colors 8) (background light)) (:foreground "black" :background "yellow")) (((class color) (min-colors 8) (background dark)) (:foreground "white" :background "blue")) (((type tty) (class mono)) (:inverse-video t)) (t (:background "gray"))))
-;;  '(next-error ((t (:inherit (region)))))
-;;  '(query-replace ((t (:inherit (isearch)))))
-;;  ;; #071c61
-;;  ;; #052328
-;;  '(default ((t (:inherit nil :stipple nil :background "#052328" :foreground "#b4a485" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "outline" :family "Consolas")))))
+(deftheme Kristian_Ramsamooj_theme_2)
+(custom-theme-set-faces
+ 'Kristian_Ramsamooj_theme_2
+ (set-cursor-color "light green")
+ '(fixed-pitch ((t (:family "Monospace"))))
+ '(variable-pitch ((t (:family "Arial" :foundry "outline" :width normal :height 98 :weight normal :slant normal))))
+ '(escape-glyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
+ '(minibuffer-prompt ((t (:weight bold :foreground "#708090"))))
+ '(highlight ((t (:background "red"))))
+ '(region ((t (:background "blue"))))
+ '(shadow ((((class color grayscale) (min-colors 88) (background light)) (:foreground "grey50")) (((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey70")) (((class color) (min-colors 8) (background light)) (:foreground "green")) (((class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
+ '(secondary-selection ((((class color) (min-colors 88) (background light)) (:background "yellow1")) (((class color) (min-colors 88) (background dark)) (:background "SkyBlue4")) (((class color) (min-colors 16) (background light)) (:background "yellow")) (((class color) (min-colors 16) (background dark)) (:background "SkyBlue4")) (((class color) (min-colors 8)) (:foreground "black" :background "cyan")) (t (:inverse-video t))))
+ '(trailing-whitespace ((((class color) (background light)) (:background "red1")) (((class color) (background dark)) (:background "red1")) (t (:inverse-video t))))
+ '(font-lock-builtin-face ((t (:foreground "#cfbfad"))))
+ ;; change here was green4
+ ;; change here was #3FDF1F
+ '(font-lock-comment-delimiter-face ((t (:foreground "#3FDF1F"))))
+ '(font-lock-comment-face ((t (:foreground "#3FDF1F"))))
+ ;; change here they were both green3 
+ '(font-lock-constant-face ((t (:foreground "#85ecd7"))))
+ '(font-lock-doc-face ((t (:foreground "#cd8b00"))))
+ '(font-lock-function-name-face ((t (:foreground "#e1f4ff"))))
+ '(font-lock-keyword-face ((t (:foreground "#e1f4ff"))))
+ '(font-lock-negation-char-face ((t nil)))
+ '(font-lock-preprocessor-face ((t (:foreground "#ade6b3"))))
+ '(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
+ '(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
+;; string was this before  ;;#0BB6AB
+ '(font-lock-string-face ((t (:foreground "#0fdfaf"))))
+ '(font-lock-type-face ((t (:foreground "#ade6b3"))))
+ '(font-lock-variable-name-face ((t (:foreground "#e1f4ff"))))
+ '(font-lock-warning-face ((t (:foreground "#ffffff" :background "#ff0000"))))
+ '(button ((t (:inherit (link)))))
+ '(link ((((class color) (min-colors 88) (background light)) (:underline (:color foreground-color :style line) :foreground "RoyalBlue3")) (((class color) (background light)) (:underline (:color foreground-color :style line) :foreground "blue")) (((class color) (min-colors 88) (background dark)) (:underline (:color foreground-color :style line) :foreground "cyan1")) (((class color) (background dark)) (:underline (:color foreground-color :style line) :foreground "cyan")) (t (:inherit (underline)))))
+ '(link-visited ((default (:inherit (link))) (((class color) (background light)) (:foreground "magenta4")) (((class color) (background dark)) (:foreground "violet"))))
+ '(fringe ((t (:foreground "#cfbfad" :background "#1e1e27"))))
+ '(header-line ((default (:inherit (mode-line))) (((type tty)) (:underline (:color foreground-color :style line) :inverse-video nil)) (((class color grayscale) (background light)) (:box nil :foreground "grey20" :background "grey90")) (((class color grayscale) (background dark)) (:box nil :foreground "grey90" :background "grey20")) (((class mono) (background light)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "black" :background "white")) (((class mono) (background dark)) (:underline (:color foreground-color :style line) :box nil :inverse-video nil :foreground "white" :background "black"))))
+ '(tooltip ((t (:foreground "systeminfotext" :background "systeminfowindow" :inherit (variable-pitch)))))
+ '(mode-line ((((class color) (min-colors 88)) (:foreground "black" :background "#b4a485" :box (:line-width -1 :color nil :style released-button))) (t (:inverse-video t))))
+ ;; '(mode-line-emphasis ((t (:weight bold))))
+ '(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color "blue" :style released-button))) (t (:inherit (highlight)))))
+ ;; change here background color was #b4a485 how is grey70
+ '(mode-line-inactive ((t (:foreground "black" :background "grey70"))))
+ ;; change here was red now pink
+ '(isearch ((t (:weight bold :foreground "#303030" :background "pink"))))
+ '(isearch-fail ((((class color) (min-colors 88) (background light)) (:background "RosyBrown1")) (((class color) (min-colors 88) (background dark)) (:background "red4")) (((class color) (min-colors 16)) (:background "pink")) (((class color) (min-colors 8)) (:background "pink")) (((class color grayscale)) (:foreground "grey")) (t (:inverse-video t))))
+ ;; Get rid of this in order to have a clear background while isearch 
+ ;; '(lazy-highlight ((((class color) (min-colors 88) (background light)) (:background "blue")) (((class color) (min-colors 88) (background dark)) (:background "blue")) (((class color) (min-colors 16)) (:background "blue")) (((class color) (min-colors 8)) (:background "blue")) (t (:underline (:color foreground-color :style line)))))
+ '(match ((((class color) (min-colors 88) (background light)) (:background "yellow1")) (((class color) (min-colors 88) (background dark)) (:background "RoyalBlue3")) (((class color) (min-colors 8) (background light)) (:foreground "black" :background "yellow")) (((class color) (min-colors 8) (background dark)) (:foreground "white" :background "blue")) (((type tty) (class mono)) (:inverse-video t)) (t (:background "gray"))))
+ '(next-error ((t (:inherit (region)))))
+ '(query-replace ((t (:inherit (isearch)))))
+ ;; #071c61
+ ;; #052328
+ '(default ((t (:inherit nil :stipple nil :background "#052328" :foreground "#b4a485" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "outline" :family "Consolas")))))
 
-;; (provide-theme 'Kristian_Ramsamooj_theme_2)
+(provide-theme 'Kristian_Ramsamooj_theme_2)
 
 ;; separation 
 
@@ -183,68 +197,69 @@
 ;; '(font-lock-comment-face ((t (:foreground "MediumAquamarine"))))
 
 ;; default-theme
-(deftheme default-black "My_theme")
+;; (deftheme default-black "My_theme")
 
-;; Operator Fonts
-(defface font-lock-operator-face
-  '((t (:foreground "#FF0000"))) "Basic face for operator." :group 'basic-faces)
+;; ;; Operator Fonts
+;; (defface font-lock-operator-face
+;;   '((t (:foreground "#FF0000"))) "Basic face for operator." :group 'basic-faces)
 
-;; ;; C-Like
-;; ;; (dolist (mode-iter '(c-mode c++-mode java-mode))
-;; ;;   (font-lock-add-keywords mode-iter
-;; ;;    '(("\\([~^&\|!<>=,.\\+*/%-]\\)" 0 'font-lock-operator-face keep))))
+;; ;; ;; C-Like
+;; ;; ;; (dolist (mode-iter '(c-mode c++-mode java-mode))
+;; ;; ;;   (font-lock-add-keywords mode-iter
+;; ;; ;;    '(("\\([~^&\|!<>=,.\\+*/%-]\\)" 0 'font-lock-operator-face keep))))
 
-(dolist (mode-iter '(c-mode c++-mode java-mode rust-mode))
-  (font-lock-add-keywords mode-iter
-                          '(("\\([~^&\|!<>=,.:\\+*/%-]\\)" 0 'font-lock-operator-face keep))))
+;; (dolist (mode-iter '(c-mode c++-mode java-mode rust-mode))
+;;   (font-lock-add-keywords mode-iter
+;;                           '(("\\([~^&\|!<>=,.:\\+*/%-]\\)" 0 'font-lock-operator-face keep))))
 
-(custom-theme-set-faces
- 'default-black
- ;; color of function names
- '(font-lock-function-name-face ((t (:foreground "#4bf6ff"))))
- ;; color of built in function names
- '(font-lock-builtin-face ((t (:foreground "#cfbfad"))))
- ;; change the data types of variables 
- '(font-lock-type-face ((t (:foreground "#f7fa57"))))
- ;; this is for stuff like for, if, while 
- ;; '(font-lock-keyword-face ((t (:foreground "yellow"))))
- '(font-lock-preprocessor-face ((t (:italic nil :foreground "#F5F5F5"))))
- '(font-lock-variable-name-face ((t (:foreground "white")))) 
- ;; for the names of constants, like 'NULL' in C.
- '(font-lock-constant-face ((t (:foreground "#7785f9" :weight bold))))
- ;; '(font-lock-constant-face ((((class color) (background dark)) (:bold t :foreground "DarkOrchid"))))
- ;; '(mode-line ((((class color) (min-colors 88)) (:foreground "black" :background "blue" :box (:line-width -1 :color nil :style released-button))) (t (:inverse-video t))))
- ;; '(mode-line-inactive ((t (:foreground "black" :background "grey75"))))
+;; (custom-theme-set-faces
+;;  'default-black
+;;  ;; color of function names
+;;  '(font-lock-function-name-face ((t (:foreground "#4bf6ff"))))
+;;  ;; color of built in function names
+;;  '(font-lock-builtin-face ((t (:foreground "#cfbfad"))))
+;;  ;; change the data types of variables 
+;;  '(font-lock-type-face ((t (:foreground "#f7fa57"))))
+;;  ;; this is for stuff like for, if, while 
+;;  ;; '(font-lock-keyword-face ((t (:foreground "yellow"))))
+;;  '(font-lock-preprocessor-face ((t (:italic nil :foreground "#F5F5F5"))))
+;;  '(font-lock-variable-name-face ((t (:foreground "white")))) 
+;;  ;; for the names of constants, like 'NULL' in C.
+;;  '(font-lock-constant-face ((t (:foreground "#7785f9" :weight bold))))
+;;  ;; '(font-lock-constant-face ((((class color) (background dark)) (:bold t :foreground "DarkOrchid"))))
+;;  ;; '(mode-line ((((class color) (min-colors 88)) (:foreground "black" :background "blue" :box (:line-width -1 :color nil :style released-button))) (t (:inverse-video t))))
+;;  ;; '(mode-line-inactive ((t (:foreground "black" :background "grey75"))))
 
- ;; was yellow now #f7fa57
- '(shadow ((((class color grayscale) (min-colors 88) (background light)) (:foreground "grey50")) (((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey70")) (((class color) (min-colors 8) (background light)) (:foreground "green")) (((class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
+;;  ;; was yellow now #f7fa57
+;;  '(shadow ((((class color grayscale) (min-colors 88) (background light)) (:foreground "grey50")) (((class color grayscale) (min-colors 88) (background dark)) (:foreground "grey70")) (((class color) (min-colors 8) (background light)) (:foreground "green")) (((class color) (min-colors 8) (background dark)) (:foreground "yellow"))))
 
- ;; (set-frame-font "lucida console 12" nil t)
- (set-frame-font "Consolas-174" nil t)
+;;  ;; (set-frame-font "lucida console 11" nil t)
+;;  ;; (set-frame-font "lucida console" nil t)
+;;  (set-frame-font "Consolas-174" nil t)
 
 
- ;; #1A1110
- ;; #1B1B1B
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#F5F5F5" :inverse-video nil :box nil :strike-t*hrough nil :overline nil :underline nil :slant normal :weight normal :width normal :height 105))))
- '(highlight ((((class color) (min-colors 88) (background dark)) (:background "#111111"))))
- (set-cursor-color "red")
- ;; was #464740
- '(region ((nil (:background "blue"))))
- '(hl-line ((nil (:background "#222222"))))
- '(yas-field-highlight-face ((nil (:background "#333399"))))
- '(fixed-pitch ((t (:family "Monospace"))))
- '(variable-pitch ((t (:family "Arial" :foundry "outline" :width normal :height 98 :weight normal :slant normal))))
- '(highlight-numbers-number ((t (:foreground "#f533ff"))))
- ;; '(highlight-numbers-number ((t (:foreground "white"))))
- '(js2-function-param-face ((t (:foreground "LightGoldenrod"))))
- '(font-lock-warning-face ((nil (:foreground "#ff6666"))))
- (set-face-foreground font-lock-string-face "#fb138b")
- ;; (set-face-foreground font-lock-comment-face "#6495ED")
- (set-face-foreground font-lock-comment-face "#3FDF1F")
- '(show-paren-match ((nil (:background "#333399")))) 
- '(show-paren-mismatch ((((class color)) (:background "red")))))
+;;  ;; #1A1110
+;;  ;; #1B1B1B
+;;  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "#F5F5F5" :inverse-video nil :box nil :strike-t*hrough nil :overline nil :underline nil :slant normal :weight normal :width normal :height 105))))
+;;  '(highlight ((((class color) (min-colors 88) (background dark)) (:background "#111111"))))
+;;  (set-cursor-color "red")
+;;  ;; was #464740
+;;  '(region ((nil (:background "blue"))))
+;;  '(hl-line ((nil (:background "#222222"))))
+;;  '(yas-field-highlight-face ((nil (:background "#333399"))))
+;;  '(fixed-pitch ((t (:family "Monospace"))))
+;;  '(variable-pitch ((t (:family "Arial" :foundry "outline" :width normal :height 98 :weight normal :slant normal))))
+;;  '(highlight-numbers-number ((t (:foreground "#f533ff"))))
+;;  ;; '(highlight-numbers-number ((t (:foreground "white"))))
+;;  '(js2-function-param-face ((t (:foreground "LightGoldenrod"))))
+;;  '(font-lock-warning-face ((nil (:foreground "#ff6666"))))
+;;  (set-face-foreground font-lock-string-face "#fb138b")
+;;  ;; (set-face-foreground font-lock-comment-face "#6495ED")
+;;  (set-face-foreground font-lock-comment-face "#3FDF1F")
+;;  '(show-paren-match ((nil (:background "#333399")))) 
+;;  '(show-paren-mismatch ((((class color)) (:background "red")))))
 
-(provide-theme 'default-black)
+;; (provide-theme 'default-black)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; end of my themes ;;; 
@@ -253,6 +268,54 @@
 ;;;;;;;;;;;;;;;;;;
 ;; Some changes ;;
 ;;;;;;;;;;;;;;;;;;
+
+;; Taken and modified from Casey Muratori
+;; Compilation: 
+(setq my-buildscript "build.bat")
+(require 'compile)
+
+(setq split-width-threshold 1)
+
+(setq compilation-context-lines 0)
+(setq compilation-error-regexp-alist
+    (cons '("^\\([0-9]+>\\)?\\(\\(?:[a-zA-Z]:\\)?[^:(\t\n]+\\)(\\([0-9]+\\)) : \\(?:fatal error\\|warnin\\(g\\)\\) C[0-9]+:" 2 3 nil (4))
+     compilation-error-regexp-alist))
+
+(defun find-project-directory-recursive ()
+  "Recursively search for a makefile."
+  (interactive)
+  (if (file-exists-p my-buildscript) t
+      (cd "../")
+      (find-project-directory-recursive)))
+
+(defun lock-compilation-directory ()
+  "The compilation process should NOT hunt for a makefile"
+  (interactive)
+  (setq compilation-directory-locked t)
+  (message "Compilation directory is locked."))
+
+(defun unlock-compilation-directory ()
+  "The compilation process SHOULD hunt for a makefile"
+  (interactive)
+  (setq compilation-directory-locked nil)
+  (message "Compilation directory is roaming."))
+
+(defun find-project-directory ()
+  "Find the project directory."
+  (interactive)
+  (setq find-project-from-directory default-directory)
+  (switch-to-buffer-other-window "*compilation*")
+  (if compilation-directory-locked (cd last-compilation-directory)
+  (cd find-project-from-directory)
+  (find-project-directory-recursive)
+  (setq last-compilation-directory default-directory)))
+
+(defun make-without-asking ()
+  "Make the current build."
+  (interactive)
+  (if (find-project-directory) (compile my-buildscript))
+  (other-window -1))
+(define-key global-map "\em" 'make-without-asking)
 
 ;; Save desktop sessions 
 ;; do a desktop-save, so we know what 
@@ -268,6 +331,14 @@
 (set-face-foreground 'linum "#f7fa57")
 (setq-default left-fringe-width  10)
 (set-face-attribute 'fringe nil :background "black")
+
+;; 80 column rule for c code
+;(require 'fill-column-indicator)
+;; (setq fci-rule-width 10)
+;; (setq fci-rule-color "red")
+;; (add-hook 'c-mode-hook 'fci-mode)
+;; (add-hook 'c++-mode-hook 'fci-mode)
+;; (setq-default fill-column 80)
 
 ;; Stop all that 3D shit 
 (set-face-attribute 'mode-line nil :box nil)
@@ -293,7 +364,7 @@
 ;; Rebinding of highlighting the entire buffer
 (global-set-key (kbd "C-x C-a") 'mark-whole-buffer)
 
-;; unset the old highlighting key
+;; unset the old highlight the entire buffer key
 (global-set-key (kbd "C-x h") 'ignore)
 
 ;; unset the help key because it is annoying 
@@ -349,6 +420,9 @@
 ;; disable the use of the right mouse button 
 ;; since <|highlight + right-mouse = delete|> 
 (global-set-key [down-mouse-3] 'ignore)
+
+;; turn off hungry backspace? 
+(global-unset-key [(control backspace)])
 
 ;; disable mouse middle scrolling button click
 ;; which just pastes a region
@@ -424,8 +498,8 @@
 (global-set-key (kbd "M-i") 'change-inner)
 (global-set-key (kbd "M-o") 'change-outer)
 
-;; when overwrite highlighted region
-(delete-selection-mode 1)
+;; Delete selected(highlighted) region by typing
+;; (delete-selection-mode 1)
 
 ;; re-binding of the meta key 
 (setq alt 'meta) 
@@ -501,7 +575,7 @@
 ;; no bell noises 
 (setq ring-bell-function 'ignore)
 
-;; smooth scroll
+;; smooth scroll 
 (setq redisplay-dont-pause t)
 
 (setq redisplay-dont-pause t
@@ -521,7 +595,7 @@
 ;; no welcome menu
 (setq inhibit-startup-message t)
 
-;; easier scrolling
+;; easier scrolling 
 (mouse-wheel-mode t)
 
 ;; allow undo tree for undo-ing / redo-ing
@@ -594,7 +668,7 @@
         (message "Indented buffer.")))))
 
 ;; Keybinding auto indent region
-(global-set-key (kbd "C-f") #'er-indent-region-or-buffer)
+(global-set-key (kbd "C-f") 'er-indent-region-or-buffer)
 
 ;; show columns and rows 
 (column-number-mode 1)
@@ -640,7 +714,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (rust-mode cherry-blossom-theme typing igrep nasm-mode jupyter go-autocomplete multiple-cursors go-mode night-owl-theme multi-term crosshairs pdfgrep highlight-numbers change-inner expand-region ace-window ac-ispell moe-theme delight diminish el-get ein python-cell zenburn-theme ipython ob-ipython undo-tree python-mode python))))
+    (anzu fill-column-indicator rust-mode cherry-blossom-theme typing igrep nasm-mode jupyter go-autocomplete multiple-cursors go-mode night-owl-theme multi-term crosshairs pdfgrep highlight-numbers change-inner expand-region ace-window ac-ispell moe-theme delight diminish el-get ein python-cell zenburn-theme ipython ob-ipython undo-tree python-mode python))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
