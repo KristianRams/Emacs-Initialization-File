@@ -771,3 +771,9 @@
 (delight '((abbrev-mode "" abbrev)
            (undo-tree-mode nil "Undo-Tree")
            (emacs-lisp-mode "EL" :major)))
+
+;; Something clobbered my delete key 
+;; This fixes del to act like del and 
+;; not like backspace
+(normal-erase-is-backspace-mode 1)
+
